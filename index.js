@@ -3,18 +3,22 @@ var list = require('./data.json').dataList || [];
 var fs = require('fs');
 
 var url = 'https://api.github.com/zen';
+var cursor = 0 ;
 
 var option = {
   timeout: 10000
 }
 
-
-function hasEnough() {
-  var result = false;
-  if (list.length > 10) {
-    result = true;
+function hasEnough(data) {
+  if (cursor > 5) {
+    return true;
   }
-  return result;
+  if (list.indexOf(data) != -1) {
+    cursor ++;
+  } else {
+    cursor = 0;
+  }
+  return false;
 }
 
 function doFetch(cb) {
@@ -29,13 +33,13 @@ function doFetch(cb) {
       list.push(result);
     }
     console.log(result);
-    cb && cb();
+    cb && cb(result);
   });
 }
 
-function saveData() {
+function saveData(data) {
 
-  if (hasEnough()) {
+  if (hasEnough(data)) {
     fs.writeFileSync('./data.json', JSON.stringify(list, 2, 2));  
   } else {
     doFetch(saveData);
