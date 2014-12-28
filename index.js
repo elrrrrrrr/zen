@@ -4,13 +4,14 @@ var fs = require('fs');
 
 var url = 'https://api.github.com/zen';
 var cursor = 0 ;
+var MAX_COUNT = 5;
 
 var option = {
   timeout: 10000
 }
 
 function hasEnough(data) {
-  if (cursor > 5) {
+  if (cursor > MAX_COUNT) {
     return true;
   }
   if (list.indexOf(data) != -1) {
