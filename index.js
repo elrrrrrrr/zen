@@ -47,4 +47,9 @@ function saveData(data) {
   }
 }
 
+function showRandom() {
+  
+  console.log(list)
+}
+
 doFetch(saveData)
