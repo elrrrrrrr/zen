@@ -1,10 +1,11 @@
+#!/usr/bin/env node
 var urllib = require('urllib');
-var list = require('./data.json').dataList || [];
+var list = require('./data.json') || [];
 var fs = require('fs');
 
 var url = 'https://api.github.com/zen';
 var cursor = 0 ;
-var MAX_COUNT = 5;
+var MAX_COUNT = 10; 
 
 var option = {
   timeout: 10000
@@ -30,26 +31,36 @@ function doFetch(cb) {
       //TODO
     }
     var result = data.toString();
+    if (JSON.parse(result).message) {
+      cb();
+    }
     if (list.indexOf(result) == -1) {
       list.push(result);
     }
     console.log(result);
-    cb && cb(result);
+    if (hasEnough(result)) {
+      cb && cb(result);
+    }else {
+      doFetch(saveData);
+    }
   });
 }
 
-function saveData(data) {
-
-  if (hasEnough(data)) {
+function saveData() {
     fs.writeFileSync('./data.json', JSON.stringify(list, 2, 2));  
-  } else {
-    doFetch(saveData);
-  }
 }
 
 function showRandom() {
-  
-  console.log(list)
+  var items = list;
+  var random = items[Math.floor(Math.random()*items.length)];  
+  var color = 36; 
+  console.log("\x1b[%sm%s",color,random);
 }
 
-doFetch(saveData)
+//doFetch(saveData)
+//showRandom();
+if (process.argv[2] == 'fetch') {
+  doFetch(saveData);
+} else {
+  showRandom();
+}

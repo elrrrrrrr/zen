@@ -1,8 +1,9 @@
 {
-  "name": "zen",
-  "version": "0.0.0",
-  "description": "zen ===",
+  "name": "codezen",
+  "version": "0.0.23",
+  "description": "Do not forget the coding zen .",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +11,7 @@
     "type": "git",
     "url": "git://github.com/elrrrrrrr/zen.git"
   },
-  "author": "",
+  "author": "elrrrrrrr",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/elrrrrrrr/zen/issues"
