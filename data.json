@@ -12,6 +12,5 @@
   "Approachable is better than simple.",
   "Non-blocking is better than blocking.",
   "Mind your words, they are important.",
-  "Encourage flow.",
-  "{\"message\":\"API rate limit exceeded for 124.160.28.4. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://developer.github.com/v3/#rate-limiting\"}"
+  "Encourage flow."
 ]
